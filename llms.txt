@@ -15,3 +15,4 @@
 - Free Forever: Unlimited raw timestamped transcript extraction + 2 full AI editorial beauty passes/day (<= 10 min video cap), Warm Paper theme, clean Markdown.
 - Pro Lifetime ($19.90 one-time, up to 3 devices): https://yujun57.gumroad.com/l/vidcraft-pro-lifetime
 - Pro Monthly ($3.99/mo): https://yujun57.gumroad.com/l/vidcraft-pro-monthly
+- Firefox Add-ons: https://addons.mozilla.org/en-US/firefox/addon/vidcraft-video-markdown-pdf/

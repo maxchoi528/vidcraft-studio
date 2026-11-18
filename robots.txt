@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vidcraft-studio.pages.dev/sitemap.xml

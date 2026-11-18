@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>TikTok &amp; Douyin Short-Video Transcripts + Whisper Audio — VidCraft Studio Pro</title>
+  <meta name="description" content="Extract TikTok &amp; Douyin WebVTT captions or capture live tab audio via Chrome MV3 Offscreen MediaRecorder + Groq Whisper when videos have zero closed captions." />
+  <link rel="canonical" href="https://vidcraft-studio.pages.dev/tiktok-douyin-transcript/" />
+  <link rel="icon" type="image/png" href="../assets/icon-128.png" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="/"><span class="mark">V</span><span>VidCraft Studio Pro</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/youtube-to-markdown/">YouTube</a>
+      <a href="/bilibili-subtitle-extractor/">Bilibili</a>
+      <a href="/video-to-word-docx/">Word .docx</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="kicker">TikTok · 抖音 Douyin · WebVTT &amp; Groq Whisper</div>
+    <h1>Transcribe Uncaptioned TikTok, Douyin &amp; Course Videos Directly in Browser.</h1>
+    <p class="lead">Short-form videos and embedded screen recordings often embed burned-in text with zero CC tracks. VidCraft intercepts WebVTT CDN streams when available and switches seamlessly to MV3 Tab Audio + Whisper <code>verbose_json</code> when captions are missing.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://yujun57.gumroad.com/l/vidcraft-pro-lifetime" target="_blank" rel="noopener noreferrer">Unlock Tab Audio Pro ($19.90)</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>How Captionless Audio Fallback Works Safely</h2>
+    <div class="grid-3">
+      <article class="card">
+        <h3>WebVTT &amp; Hydration First</h3>
+        <p>Inspects TikTok/Douyin hydration JSON (<code>__UNIVERSAL_DATA_FOR_REHYDRATION__</code>, <code>RENDER_DATA</code>) and intercepted <code>.vtt</code> streams before touching audio capture.</p>
+      </article>
+      <article class="card">
+        <h3>Self-Contained WebM Chunks</h3>
+        <p>Chrome/Edge Offscreen recorder cleanly rotates standalone WebM/Opus files below 20 MB with AudioContext pass-through so playback stays audible.</p>
+      </article>
+      <article class="card">
+        <h3>Accurate Offset Merging</h3>
+        <p>Groq <code>whisper-large-v3-turbo</code> segments automatically shift by chunk elapsed offset before entering the zero-omission editorial pipeline.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <span>VidCraft Studio Pro — Short-Video &amp; Whisper Workflow</span>
+    <span><a href="/">Home</a> · <a href="/privacy/">Privacy Policy</a></span>
+  </footer>
+</body>
+</html>

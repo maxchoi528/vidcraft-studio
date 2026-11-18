@@ -1,0 +1,17 @@
+# VidCraft Studio Pro
+> Zero-server Manifest V3 browser extension (Microsoft Edge, Firefox, Chrome) that transforms long and short videos across YouTube, Bilibili, TikTok, Douyin, and HTML5 players into zero-omission, publication-grade Markdown, Standalone HTML, Vector PDF, and Native Word (.docx) documents with bespoke typography and clickable [MM:SS] playback links.
+
+## Key URLs
+- Homepage: https://vidcraft-studio.pages.dev/
+- YouTube to Zero-Omission Markdown & Word: https://vidcraft-studio.pages.dev/youtube-to-markdown/
+- Bilibili WBI Subtitle Extractor & Notes: https://vidcraft-studio.pages.dev/bilibili-subtitle-extractor/
+- TikTok & Douyin Audio Whisper Notes: https://vidcraft-studio.pages.dev/tiktok-douyin-transcript/
+- Video Lecture to Native Word (.docx) & PDF: https://vidcraft-studio.pages.dev/video-to-word-docx/
+- German (DACH) Overview: https://vidcraft-studio.pages.dev/de/
+- Live Generated Sample Report: https://vidcraft-studio.pages.dev/showcase/distributed-consensus-report.html
+- Privacy Policy: https://vidcraft-studio.pages.dev/privacy/
+
+## Pricing & Store Channels
+- Free Forever: Unlimited raw timestamped transcript extraction + 2 full AI editorial beauty passes/day (<= 10 min video cap), Warm Paper theme, clean Markdown.
+- Pro Lifetime ($19.90 one-time, up to 3 devices): https://yujun57.gumroad.com/l/vidcraft-pro-lifetime
+- Pro Monthly ($3.99/mo): https://yujun57.gumroad.com/l/vidcraft-pro-monthly

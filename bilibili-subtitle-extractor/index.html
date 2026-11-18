@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Bilibili WBI 字幕提取与精品长文排版 — VidCraft Studio Pro</title>
+  <meta name="description" content="自动通过 B 站 WBI 签名提取分 P 与 AI 字幕，将公开课、技术分享与长视频零删减排版为 Markdown、HTML、矢量 PDF 与 Word (.docx)。" />
+  <link rel="canonical" href="https://vidcraft-studio.pages.dev/bilibili-subtitle-extractor/" />
+  <link rel="icon" type="image/png" href="../assets/icon-128.png" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="/"><span class="mark">V</span><span>VidCraft Studio Pro</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/youtube-to-markdown/">YouTube</a>
+      <a href="/tiktok-douyin-transcript/">TikTok / 抖音</a>
+      <a href="/video-to-word-docx/">Word .docx</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="kicker">B站 Bilibili · WBI 签名字幕 · 零遗漏长文</div>
+    <h1>把 B 站长视频公开课整理成出版级 Markdown 与 Word 笔记。</h1>
+    <p class="lead">内置纯 JS RFC-1321 MD5 与 Bilibili WBI <code>w_rid</code> 签名解析，精确适配合集分 P（<code>?p=</code>）与 AI CC 字幕，严格区分中西文字体栈解决中英混排锯齿问题。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://yujun57.gumroad.com/l/vidcraft-pro-lifetime" target="_blank" rel="noopener noreferrer">获取买断版 Pro ($19.90)</a>
+      <a class="btn" href="/showcase/distributed-consensus-report.html">查看排版效果示例</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>专为中文与双语知识库打磨</h2>
+    <div class="grid-3">
+      <article class="card">
+        <h3>分 P 切换自动清理缓存</h3>
+        <p>监听 B 站无刷新 SPA 路由变化，切换到合集第 2、3 集时立即重签提取当前 <code>cid</code> 对应字幕，告别错配旧字幕。</p>
+      </article>
+      <article class="card">
+        <h3>中西文字体栈优先级隔离</h3>
+        <p>所有 6 套主题均先声明 <code>-apple-system / Segoe UI / Inter / Georgia</code> 再回退 <code>PingFang SC / Microsoft YaHei / Songti SC</code>，代码指标与中文段落清晰均衡。</p>
+      </article>
+      <article class="card">
+        <h3>免服务器算力与离线 Word</h3>
+        <p>原始逐字稿永久免费无限导出；AI 精细改写支持自带 Gemini/Groq Key 或直接调用当前已登录的 DeepSeek/ChatGPT 网页标签页。</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <span>VidCraft Studio Pro — Bilibili &amp; 中文精读指南</span>
+    <span><a href="/">返回首页</a> · <a href="/privacy/">隐私政策</a></span>
+  </footer>
+</body>
+</html>

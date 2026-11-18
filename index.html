@@ -1,157 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-type="software">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>VidCraft Studio Pro — Zero-Omission Video to Markdown, HTML, PDF &amp; Word</title>
-  <meta name="description" content="Turn YouTube, Bilibili, TikTok, and Douyin videos into complete, publication-grade Markdown, HTML, Vector PDF, and Word (.docx) documents with zero omitted facts and zero messy screenshots." />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>VidCraft Studio Pro — Zero-Omission Video to Markdown, HTML, PDF &amp; Word (.docx)</title>
+  <meta name="description" content="Turn YouTube, Bilibili, TikTok, and Douyin videos into complete, publication-grade Markdown, HTML, Vector PDF, and Native Word (.docx) documents 100% locally — without omitted facts or screenshot clutter." />
   <link rel="canonical" href="https://vidcraft-studio.pages.dev/" />
-  <style>
-    :root {
-      --bg: #faf9f5;
-      --surface: #ffffff;
-      --surface-2: #f5f0e8;
-      --ink: #141413;
-      --body: #3d3d3a;
-      --muted: #6c6a64;
-      --border: #e6dfd8;
-      --accent: #cc785c;
-      --accent-btn: #944830;
-      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
-      --font-serif: Georgia, "Iowan Old Style", "Times New Roman", "Songti SC", serif;
-      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background-color: var(--bg);
-      color: var(--body);
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.68;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--accent-btn); }
-    .nav {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      font-weight: 700;
-      font-size: 17px;
-      text-decoration: none;
-    }
-    .mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      background: var(--ink);
-      color: #faf9f5;
-      border: 1px solid var(--accent);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 15px;
-    }
-    .nav-links { display: flex; gap: 20px; align-items: center; font-size: 14px; }
-    .nav-links a { text-decoration: none; color: var(--ink); font-weight: 600; }
-    .hero {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 58px 24px 40px;
-      text-align: center;
-    }
-    .kicker {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-btn);
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      padding: 4px 12px;
-      border-radius: 999px;
-      margin-bottom: 18px;
-    }
-    h1 {
-      font-family: var(--font-serif);
-      font-size: 42px;
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      color: var(--ink);
-      margin: 0 0 18px;
-    }
-    .lead {
-      font-size: 18px;
-      color: var(--body);
-      max-width: 62ch;
-      margin: 0 auto 28px;
-    }
-    .cta-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 11px 22px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--ink);
-      transition: transform 150ms var(--ease-out), background-color 150ms ease;
-    }
-    .btn:active { transform: scale(0.97); }
-    .btn-primary { background: var(--accent-btn); border-color: var(--accent-btn); color: #ffffff; }
-    .btn-ink { background: var(--ink); border-color: var(--ink); color: #faf9f5; }
-    .section { max-width: 1080px; margin: 0 auto; padding: 36px 24px; }
-    .section h2 { font-family: var(--font-serif); font-size: 26px; color: var(--ink); margin: 0 0 18px; letter-spacing: -0.015em; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-    @media (max-width: 820px) {
-      .grid-3 { grid-template-columns: 1fr; }
-      h1 { font-size: 32px; }
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px;
-    }
-    .card h3 { margin: 0 0 8px; font-size: 18px; color: var(--ink); }
-    .card p { margin: 0; font-size: 15px; color: var(--body); }
-    .pricing { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 820px; margin: 0 auto; }
-    @media (max-width: 720px) { .pricing { grid-template-columns: 1fr; } }
-    .price-num { font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--ink); margin: 8px 0; }
-    ul.clean { padding-left: 18px; margin: 12px 0 20px; }
-    ul.clean li { margin-bottom: 6px; font-size: 15px; }
-    footer {
-      max-width: 1080px;
-      margin: 28px auto 0;
-      padding: 24px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-  </style>
+  <link rel="alternate" hreflang="en" href="https://vidcraft-studio.pages.dev/" />
+  <link rel="alternate" hreflang="de" href="https://vidcraft-studio.pages.dev/de/" />
+  <link rel="alternate" hreflang="x-default" href="https://vidcraft-studio.pages.dev/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VidCraft Studio Pro — Zero-Omission Video to Markdown, PDF &amp; Word" />
+  <meta property="og:description" content="Convert long lectures and short videos across YouTube, Bilibili, TikTok &amp; Douyin into archival typography publications with clickable [MM:SS] links." />
+  <meta property="og:url" content="https://vidcraft-studio.pages.dev/" />
+  <meta property="og:image" content="https://vidcraft-studio.pages.dev/assets/screenshot-1-studio-warm-paper.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VidCraft Studio Pro — Zero-Omission Video to Markdown, PDF &amp; Word" />
+  <meta name="twitter:description" content="Zero-omission chunked video transcription &amp; editorial beautification for YouTube, Bilibili, TikTok &amp; Douyin." />
+  <meta name="twitter:image" content="https://vidcraft-studio.pages.dev/assets/screenshot-1-studio-warm-paper.png" />
+  <link rel="icon" type="image/png" href="./assets/icon-128.png" />
+  <link rel="stylesheet" href="./assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "VidCraft: Video to Markdown, PDF & Word",
+    "alternateName": "VidCraft Studio Pro",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Windows, macOS, Linux (Microsoft Edge, Firefox, Google Chrome)",
+    "url": "https://vidcraft-studio.pages.dev/",
+    "softwareVersion": "1.0.0",
+    "featureList": [
+      "Zero-omission 6-minute overlapping video chunking engine with coverage ratio check",
+      "YouTube timedtext POT & ANDROID InnerTube layer + Bilibili WBI + TikTok/Douyin WebVTT extraction",
+      "Tab Audio capture + Groq Whisper transcription for captionless videos",
+      "6 bespoke reading themes: Warm Paper, Magazine Print, Knowledge Docs, Obsidian Scholar, Precision Mono, Swiss Gallery",
+      "Native Microsoft Word (.docx), Vector PDF, Obsidian/Notion YAML Markdown, and Standalone HTML"
+    ],
+    "offers": [
+      { "@type": "Offer", "price": "0.00", "priceCurrency": "USD", "name": "Free Edition" },
+      { "@type": "Offer", "price": "19.90", "priceCurrency": "USD", "name": "Pro Lifetime License", "url": "https://yujun57.gumroad.com/l/vidcraft-pro-lifetime" },
+      { "@type": "Offer", "price": "3.99", "priceCurrency": "USD", "name": "Pro Monthly", "url": "https://yujun57.gumroad.com/l/vidcraft-pro-monthly" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why not just ask an AI to summarize a 45-minute video into 5 bullets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Single-shot summaries erase concrete benchmarks, caveats, proper nouns, and worked examples. VidCraft splits transcripts into overlapping 6-minute segments (up to 1,800 words or 3,200 CJK chars) and runs a coverage sanity check (<0.45 flags retry) so details survive 1:1."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does VidCraft Studio Pro run on zero developer backend servers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Subtitle parsing, chunking, 6-theme HTML formatting, Print PDF, and OpenXML .docx binary compilation run 100% inside your browser. Direct AI passes call your own Gemini/Groq/DeepSeek key or route seamlessly through your already-signed-in ChatGPT/Claude/DeepSeek/Gemini tab."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are captionless TikTok, Douyin, or screen-recorded videos handled?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In Pro mode on Chrome/Edge, VidCraft captures active tab audio via MV3 tabCapture + offscreen MediaRecorder (WebM/Opus chunks under 20 MB) and sends segments directly to Groq whisper-large-v3-turbo with exact offset timestamps."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <nav class="nav">
@@ -160,38 +84,106 @@
       <span>VidCraft Studio Pro</span>
     </a>
     <div class="nav-links">
-      <a href="#features">Pure-Text Craft</a>
-      <a href="#pricing">Pricing</a>
+      <a href="/youtube-to-markdown/">YouTube Notes</a>
+      <a href="/bilibili-subtitle-extractor/">Bilibili WBI</a>
+      <a href="/tiktok-douyin-transcript/">TikTok / Douyin</a>
+      <a href="/video-to-word-docx/">Word &amp; PDF</a>
+      <a href="/de/">DE</a>
       <a href="/privacy/">Privacy</a>
     </div>
   </nav>
 
   <header class="hero">
-    <div class="kicker">YouTube · Bilibili · TikTok · Douyin · Whisper</div>
+    <div class="kicker">YouTube · Bilibili · TikTok · Douyin · Tab Audio Whisper</div>
     <h1>Stop Shrinking 45-Minute Videos Into Five Shallow Bullets.</h1>
     <p class="lead">
-      VidCraft Studio Pro converts spoken video across platforms into complete, zero-omission Markdown, HTML, Vector PDF, and Native Word (.docx) publications — rendered with archival typography, clickable <code>[MM:SS]</code> timestamps, comparison tables, and zero screenshot clutter.
+      VidCraft Studio Pro transforms spoken video across platforms into complete, zero-omission Markdown, Standalone HTML, Vector PDF, and Native Word (.docx) publications — designed purely with archival typography, clickable <code>[MM:SS]</code> playback anchors, and zero video-frame clutter.
     </p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#pricing">Get Pro Lifetime ($19.90)</a>
+      <a class="btn btn-primary" href="https://yujun57.gumroad.com/l/vidcraft-pro-lifetime" target="_blank" rel="noopener noreferrer">Get Pro Lifetime ($19.90)</a>
       <a class="btn btn-ink" href="https://yujun57.gumroad.com/l/vidcraft-pro-monthly" target="_blank" rel="noopener noreferrer">Monthly Plan ($3.99/mo)</a>
+      <a class="btn" href="/showcase/distributed-consensus-report.html">Read Live Export Sample</a>
     </div>
   </header>
 
+  <section id="showcase" class="section">
+    <h2>Pure-Text Publication Craft Across Six Reading Themes</h2>
+    <div class="grid-2">
+      <figure class="shot-card" style="margin:0;">
+        <img src="./assets/screenshot-1-studio-warm-paper.png" width="1280" height="800" loading="lazy" alt="VidCraft Publication Studio Warm Paper editorial layout with Masthead, TL;DR, Jump TOC and clickable [MM:SS] pills" />
+        <figcaption class="shot-cap">Warm Paper (Default Free Theme) — Claude Warm Archival Canvas</figcaption>
+      </figure>
+      <figure class="shot-card" style="margin:0;">
+        <img src="./assets/screenshot-2-knowledge-docs.png" width="1280" height="800" loading="lazy" alt="VidCraft Knowledge Docs theme featuring sticky left Contents sidebar and emerald KEY POINT callout cards" />
+        <figcaption class="shot-cap">Knowledge Docs (Pro) — Sticky Left Navigation &amp; Structured Callouts</figcaption>
+      </figure>
+      <figure class="shot-card" style="margin:0;">
+        <img src="./assets/screenshot-3-obsidian-scholar.png" width="1280" height="800" loading="lazy" alt="VidCraft Obsidian Scholar dark reading mode with Georgia serif headings and bilingual CJK+English rendering" />
+        <figcaption class="shot-cap">Obsidian Scholar (Pro) — Low-Glare Night Reader &amp; CJK Alignment</figcaption>
+      </figure>
+      <figure class="shot-card" style="margin:0;">
+        <img src="./assets/screenshot-4-sidepanel-workspace.png" width="1280" height="800" loading="lazy" alt="VidCraft Split Side Panel extracting subtitles and seeking video playback cleanly alongside YouTube or Bilibili" />
+        <figcaption class="shot-cap">Split Reading Studio — One Click to Seek Playback at Exact Timestamps</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="comparison" class="section">
+    <h2>Built to Solve Real Competitor Pain Points</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability / User Pain Point</th>
+            <th>VidCraft Studio Pro</th>
+            <th>Typical Summary Extensions (Eightify / NoteGPT / Glasp)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Long Technical Talks (40–180 min)</td>
+            <td>Zero-omission 6-min overlapping chunks + &lt;0.45 coverage retry guard</td>
+            <td>Single-shot compressed bullets dropping examples &amp; numbers</td>
+          </tr>
+          <tr>
+            <td>Visual Layout Aesthetics</td>
+            <td>Pure-text publication hierarchy (Masthead, Tables, Pull Quotes, 6 Themes)</td>
+            <td>Plain chat dump or blurry keyframe screenshots cluttering text</td>
+          </tr>
+          <tr>
+            <td>Captionless Short Videos (Douyin/TikTok)</td>
+            <td>Pro Tab Audio Capture (WebM/Opus) + Groq Whisper <code>verbose_json</code></td>
+            <td>Fails with &ldquo;No subtitles found&rdquo;</td>
+          </tr>
+          <tr>
+            <td>Compute &amp; Subscription Cost</td>
+            <td>Unlimited free raw transcripts · Pro <strong>$3.99/mo</strong> or <strong>$19.90 Lifetime</strong></td>
+            <td>$10–$20/month recurring paywalls or depleting token packs</td>
+          </tr>
+          <tr>
+            <td>Document Export Formats</td>
+            <td>Clean <code>.md</code> (Obsidian/Notion), Standalone HTML, Vector PDF, Native Word (<code>.docx</code>)</td>
+            <td>Copy-paste Markdown or web-only viewer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <section id="features" class="section">
-    <h2>Pure-Text Editorial Architecture</h2>
+    <h2>Supported Video Platforms &amp; Workflows</h2>
     <div class="grid-3">
       <article class="card">
-        <h3>Zero-Omission Chunking Engine</h3>
-        <p>Automatically segments long lectures into 6-minute overlapping batches with an automated coverage ratio guard (&lt; 0.45 triggers 1-click segment retry), keeping every number, example, and argument intact.</p>
+        <h3><a href="/youtube-to-markdown/">YouTube to Markdown &amp; PDF</a></h3>
+        <p>Defeats empty POT-gated <code>timedtext</code> responses via 3-layer extraction (live player cache, ANDROID InnerTube, DOM panel fallback) and turns hours of lectures into clickable archives.</p>
       </article>
       <article class="card">
-        <h3>6 Bespoke Reading Themes</h3>
-        <p>Crafted purely around typography — Warm Paper, Magazine Print, Knowledge Docs (sticky TOC), Obsidian Scholar, Precision Mono, and Swiss Gallery — with Western-first CJK mixed font stacks.</p>
+        <h3><a href="/bilibili-subtitle-extractor/">Bilibili WBI Subtitle Notes</a></h3>
+        <p>Built-in RFC-1321 MD5 WBI request signing and multi-part <code>?p=</code> detection extract Bilibili AI &amp; creator CC tracks with Western-before-CJK typography pairing.</p>
       </article>
       <article class="card">
-        <h3>Seamless $0 Compute Paths</h3>
-        <p>Run effortlessly via Direct Free-Tier BYOK (Gemini / Groq / DeepSeek), Open AI Browser Tabs (ChatGPT / Claude / DeepSeek / Gemini), or Tab Audio + Groq Whisper for uncaptioned videos.</p>
+        <h3><a href="/tiktok-douyin-transcript/">TikTok, Douyin &amp; Word (.docx)</a></h3>
+        <p>Intercepts CDN WebVTT streams or switches seamlessly to Tab Audio + Whisper transcription, exporting print-ready PDF or OpenXML <a href="/video-to-word-docx/">Word .docx documents</a>.</p>
       </article>
     </div>
   </section>
@@ -204,21 +196,21 @@
         <h3>Starter Reader</h3>
         <div class="price-num">$0</div>
         <ul class="clean">
-          <li>Unlimited free raw timestamped transcripts</li>
+          <li>Unlimited free raw timestamped transcripts &amp; copy</li>
           <li>2 full AI Publication passes per day (&lt;= 10 min cap)</li>
-          <li>Warm Paper reading theme + Clean Markdown</li>
-          <li>Zero account, 100% local privacy</li>
+          <li>Warm Paper reading theme + Clean Markdown export</li>
+          <li>Zero account, zero broad <code>&lt;all_urls&gt;</code> permissions</li>
         </ul>
       </div>
       <div class="card" style="border-color: var(--accent);">
-        <div class="kicker">One-Time or Monthly</div>
+        <div class="kicker">3x Lower Than Industry Average</div>
         <h3>VidCraft Studio Pro</h3>
         <div class="price-num">$19.90 <span style="font-size:15px;font-weight:400;color:var(--muted);">lifetime (or $3.99/mo)</span></div>
         <ul class="clean">
           <li>Full multi-hour videos (&gt; 10:00) &amp; unlimited daily passes</li>
           <li>Tab Audio Capture + Groq Whisper transcription</li>
-          <li>Native Word (.docx), Obsidian/Notion YAML, watermark-free PDF/HTML</li>
-          <li>All 6 reading themes &amp; 4 editorial styles (3 devices)</li>
+          <li>Native Word (<code>.docx</code>), Obsidian/Notion YAML, watermark-free PDF/HTML</li>
+          <li>All 6 reading themes &amp; 4 editorial styles (up to 3 devices)</li>
         </ul>
         <div class="cta-row" style="justify-content:flex-start;">
           <a class="btn btn-primary" href="https://yujun57.gumroad.com/l/vidcraft-pro-lifetime" target="_blank" rel="noopener noreferrer">Lifetime ($19.90)</a>
@@ -228,9 +220,27 @@
     </div>
   </section>
 
+  <section id="faq" class="section-narrow">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Why not shrink long videos into 5 quick bullets?</summary>
+        <p>Short bullets remove real benchmarks, exact commands, edge-case warnings, and nuance. VidCraft enforces a deterministic 6-minute overlapping chunker plus a coverage-density check (&lt; 0.45 highlights low-detail segments for 1-click regeneration).</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I use VidCraft without paying external AI token bills?</summary>
+        <p>Yes. Plug in your free-tier Google Gemini or Groq API key once (bypassing page CORS seamlessly inside the extension), or launch chunks directly across your open logged-in ChatGPT, DeepSeek, Claude, or Gemini browser tabs.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why are there zero video frame screenshots in exported documents?</summary>
+        <p>Raw video screenshots break column rhythm, clutter dark/light reading themes, and inflate PDF/Word files. Instead, VidCraft pairs Mastheads, TL;DR cards, Pull Quotes, structured tables, and live clickable <code>[MM:SS]</code> anchors.</p>
+      </details>
+    </div>
+  </section>
+
   <footer>
-    <span>VidCraft Studio Pro — Pure Local MV3 Extension Architecture</span>
-    <span><a href="/privacy/">Privacy Policy</a> · Supports Chrome, Edge &amp; Firefox</span>
+    <span>VidCraft Studio Pro — Zero-Server MV3 Architecture · Built for Chrome, Edge &amp; Firefox</span>
+    <span><a href="/privacy/">Privacy Policy</a> · <a href="/llms.txt">llms.txt</a> · <a href="/showcase/distributed-consensus-report.html">Sample Output</a></span>
   </footer>
 </body>
 </html>

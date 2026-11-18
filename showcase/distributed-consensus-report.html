@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>How Distributed Systems Scale to 10M RPS (Zero-Omission Publication Sample)</title>
+<style>
+:root{--doc-bg:#ffffff;--doc-surface:#ffffff;--doc-surface-2:#f3fbf8;--doc-ink:#0a0a0a;--doc-body:#2e3432;--doc-muted:#5d6763;--doc-border:#dfe8e4;--doc-accent:#00b48a;--doc-accent-ink:#007d60;--doc-heading-font:-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;--doc-body-font:-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;--vc-font-mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--doc-bg);color:var(--doc-body);font-family:var(--doc-body-font);font-size:15.5px;line-height:1.72}
+.vc-doc-shell{max-width:72ch;width:100%;min-width:0;margin:0 auto;padding:42px 24px 64px;overflow-wrap:anywhere}
+.vc-doc-layout-wide{max-width:1020px;margin:0 auto;padding:42px 24px 64px;display:grid;grid-template-columns:230px minmax(0,70ch);gap:36px;align-items:start}
+@media(max-width:860px){.vc-doc-layout-wide{grid-template-columns:1fr}}
+.vc-masthead{border-bottom:1px solid var(--doc-border);padding-bottom:18px;margin-bottom:22px}
+.vc-masthead-kicker{font-family:var(--vc-font-mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--doc-accent-ink);margin-bottom:8px}
+.vc-masthead-title{font-family:var(--doc-heading-font);font-size:30px;line-height:1.22;letter-spacing:-.02em;color:var(--doc-ink);margin:0 0 10px;overflow-wrap:anywhere}
+.vc-masthead-meta{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--doc-muted);font-variant-numeric:tabular-nums}
+.vc-masthead-meta a,.vc-article a{color:var(--doc-accent-ink);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+.vc-tldr-card{background:var(--doc-surface-2);border:1px solid var(--doc-border);border-radius:8px;padding:16px 20px;margin-bottom:20px}
+.vc-tldr-label{font-family:var(--vc-font-mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--doc-accent-ink);margin-bottom:6px}
+.vc-toc-card{background:var(--doc-surface);border:1px solid var(--doc-border);border-radius:8px;padding:14px 16px;margin-bottom:24px;position:sticky;top:20px}
+.vc-toc-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--doc-muted);margin-bottom:8px}
+.vc-toc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.vc-toc-list a{font-size:13.5px;color:var(--doc-ink);text-decoration:none}.vc-toc-list a:hover{color:var(--doc-accent-ink);text-decoration:underline}
+.vc-article h2,.vc-article h3{font-family:var(--doc-heading-font);color:var(--doc-ink);line-height:1.3;margin:28px 0 10px}
+.vc-article h2{font-size:21px;padding-bottom:6px;border-bottom:1px solid var(--doc-border)}
+.vc-article h3{font-size:17px}.vc-article p{margin:0 0 14px}.vc-article ul,.vc-article ol{margin:0 0 14px;padding-left:22px}.vc-article li{margin-bottom:5px}
+.vc-ts-pill{font-family:var(--vc-font-mono);font-size:12px;font-variant-numeric:tabular-nums;padding:1px 6px;border-radius:5px;background:var(--doc-surface-2);border:1px solid var(--doc-border);color:var(--doc-accent-ink);text-decoration:none}
+.vc-pull-quote{margin:22px 0;padding:14px 18px;border-top:1px solid var(--doc-border);border-bottom:1px solid var(--doc-border);font-style:italic;font-size:16px;color:var(--doc-ink)}
+.vc-callout{margin:18px 0;padding:14px 18px;border-radius:8px;border:1px solid var(--doc-border);background:var(--doc-surface-2)}
+.vc-callout-title{font-family:var(--vc-font-mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--doc-accent-ink);margin-bottom:4px}
+.vc-table-wrap{overflow-x:auto;margin:18px 0;padding:8px;border:1px solid var(--doc-border);border-radius:8px;background:var(--doc-surface)}
+.vc-article table{width:100%;border-collapse:collapse;font-size:14px}.vc-article th{text-align:left;background:var(--doc-surface-2);color:var(--doc-ink);padding:10px 12px;border-bottom:1px solid var(--doc-border)}
+.vc-article td{padding:9px 12px;border-bottom:1px solid var(--doc-border)}.vc-article tr:last-child td{border-bottom:none}
+.vc-article pre{background:var(--doc-surface-2);border:1px solid var(--doc-border);border-radius:8px;padding:14px;overflow-x:auto;font-family:var(--vc-font-mono);font-size:13px}
+.vc-article code{font-family:var(--vc-font-mono);font-size:.9em;background:var(--doc-surface-2);padding:1px 5px;border-radius:4px}.vc-article pre code{background:transparent;padding:0}
+.vc-pro-gate-banner{margin:24px 0;padding:16px;border:1px dashed var(--doc-accent);border-radius:8px;background:var(--doc-surface-2)}
+.vc-raw-details{margin-top:30px;border:1px solid var(--doc-border);border-radius:8px;background:var(--doc-surface);padding:12px 16px}
+.vc-raw-pre{margin-top:10px;white-space:pre-wrap;font-family:var(--vc-font-mono);font-size:12.5px;color:var(--doc-muted)}
+.vc-watermark{margin-top:32px;padding-top:12px;border-top:1px solid var(--doc-border);font-size:12px;text-align:center;color:var(--doc-muted)}
+@media print{body,.vc-doc-root{-webkit-print-color-adjust:exact;print-color-adjust:exact}.vc-doc-shell,.vc-doc-layout-wide{max-width:100%;padding:0}.vc-pull-quote,.vc-callout,.vc-table-wrap,.vc-tldr-card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="vc-doc-root" data-theme="knowledge-docs">
+<div class="vc-doc-layout-wide"><aside><nav class="vc-toc-card" aria-label="Document Contents"><div class="vc-toc-title">Contents</div><ul class="vc-toc-list"><li><a href="#tail-latency-amplification-in-microservice-fan-out">[00:12] Tail Latency Amplification in Microservice Fan-Out</a></li><li><a href="#hedged-requests-vs-tied-requests-benchmarks">[04:18] Hedged Requests vs Tied Requests Benchmarks</a></li><li><a href="#zero-omission-protocol-configuration">[13:00] Zero-Omission Protocol Configuration</a></li></ul></nav></aside><div class="vc-doc-main"><header class="vc-masthead"><div class="vc-masthead-kicker">YOUTUBE · PURE-TEXT EDITION</div><h1 class="vc-masthead-title">How Distributed Systems Scale to 10M RPS (Zero-Omission Publication Sample)</h1><div class="vc-masthead-meta"><span>Systems Engineering Summit · Prof. Alex Chen</span><span>Duration 43:00</span><span>2026-11-18</span><a href="https://www.youtube.com/watch?v=distscale2027" target="_blank" rel="noopener noreferrer">Open Source Video</a></div></header><section class="vc-tldr-card"><div class="vc-tldr-label">Executive Summary · TL;DR</div><div><p>Tail-latency amplification degrades synchronous RPC fan-out past 8 shards. Combining hedged requests at the local p95 trigger budget (18ms), cancellation propagation, and strict 5% retry token buckets cuts production p99 from 580ms down to 31ms.</p></div></section><article class="vc-article"><h2 id="tail-latency-amplification-in-microservice-fan-out"><a class="vc-ts-pill" href="https://www.youtube.com/watch?v=distscale2027&amp;t=12s" data-sec="12" target="_blank" rel="noopener noreferrer">[00:12]</a> Tail Latency Amplification in Microservice Fan-Out</h2>
+<p>When staging tests run under low load, single-hop tail latency stays below <strong>14ms</strong>. Once an aggregator fans out to 20 backend shards concurrently, overall request completion waits for the slowest shard.</p>
+<div class="vc-callout"><div class="vc-callout-title">KEY POINT</div><p>At a 1% per-leaf tail probability across 20 parallel leaf RPCs, end-to-end probability of hitting slow p99 surges from 1% to 18.2%.</p></div>
+<h2 id="hedged-requests-vs-tied-requests-benchmarks"><a class="vc-ts-pill" href="https://www.youtube.com/watch?v=distscale2027&amp;t=258s" data-sec="258" target="_blank" rel="noopener noreferrer">[04:18]</a> Hedged Requests vs Tied Requests Benchmarks</h2>
+<div class="vc-table-wrap"><table><thead><tr><th>Strategy</th><th>Extra Traffic</th><th>Production p99 Latency</th><th>Best Topology Fit</th></tr></thead><tbody><tr><td>Synchronous Baseline</td><td>0%</td><td>580 ms</td><td>Single-hop calls</td></tr><tr><td>Hedged Reads (p95 wait)</td><td>+4.8%</td><td>31 ms</td><td>Replicated read caches</td></tr><tr><td>Tied Requests w/ Queue Token</td><td>+2.1%</td><td>34 ms</td><td>Observable server queues</td></tr></tbody></table></div>
+<blockquote class="vc-pull-quote"><p>&quot;Production reliability stems from bounding worst-case queues, never hoping averages stay low.&quot;</p></blockquote>
+<h2 id="zero-omission-protocol-configuration"><a class="vc-ts-pill" href="https://www.youtube.com/watch?v=distscale2027&amp;t=780s" data-sec="780" target="_blank" rel="noopener noreferrer">[13:00]</a> Zero-Omission Protocol Configuration</h2>
+<pre><code data-lang="bash">grpc_deadline_ms=120 hedge_delay_ms=18 max_retry_budget_ratio=0.05 ./gateway-server</code></pre>
+<ol><li>Propagate caller remaining deadline across every downstream RPC header <a class="vc-ts-pill" href="https://www.youtube.com/watch?v=distscale2027&amp;t=780s" data-sec="780" target="_blank" rel="noopener noreferrer">[13:00]</a>.</li><li>Enforce circuit-breaker backoff whenever retry consumption approaches 5%.</li></ol></article><details class="vc-raw-details"><summary>Complete Raw Timestamped Transcript (3 lines)</summary><div class="vc-raw-pre"><a class="vc-ts-pill" href="https://www.youtube.com/watch?v=distscale2027&amp;t=12s" data-sec="12" target="_blank" rel="noopener noreferrer">[00:12]</a> Today we analyze why tail latency dominates throughput past 8 shards.
+<a class="vc-ts-pill" href="https://www.youtube.com/watch?v=distscale2027&amp;t=258s" data-sec="258" target="_blank" rel="noopener noreferrer">[04:18]</a> Look at the p95 hedged delay trade-off.
+<a class="vc-ts-pill" href="https://www.youtube.com/watch?v=distscale2027&amp;t=780s" data-sec="780" target="_blank" rel="noopener noreferrer">[13:00]</a> Always enforce 120ms end-to-end deadlines.</div></details></div></div>
+</div>
+</body>
+</html>
